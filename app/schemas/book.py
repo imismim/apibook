@@ -13,6 +13,7 @@ class BookUpdate(BookBase):
 
 class BookOut(BookBase):
     id: int
+    average_rating: float
 
     class Config:
         from_attributes = True

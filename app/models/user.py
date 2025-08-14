@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Enum
+from sqlalchemy.orm import relationship
 from ..database import Base
 import enum
 
@@ -14,3 +15,5 @@ class User(Base):
     username = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
     role = Column(Enum(Role), default=Role.reader)
+    
+    ratings = relationship("BookRating", back_populates="user")

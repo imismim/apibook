@@ -9,6 +9,7 @@ class Book(Base):
     title = Column(String, nullable=False)
     author = Column(String, nullable=False)
     description = Column(Text)
+    average_rating = Column(Float, default=0.0)
     ratings = relationship("BookRating", back_populates="book")
 
 class BookRating(Base):
