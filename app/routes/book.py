@@ -13,7 +13,7 @@ def create_book(book: BookCreate, db: Session = Depends(get_db), user=Depends(re
     return crud_book.create_book(db, book.title, book.author, book.description, book.rating)
 
 @router.get("/", response_model=list[BookOut])
-def list_books(db: Session = Depends(get_db)):
+def list_books(db: Session = Depends(get_db), user=Depends(require_role(Role.writer, Role.admin))):
     return crud_book.get_books(db)
 
 @router.put("/{book_id}", response_model=BookOut)

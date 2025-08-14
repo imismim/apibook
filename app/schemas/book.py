@@ -4,7 +4,6 @@ class BookBase(BaseModel):
     title: str
     author: str
     description: str | None = None
-    rating: float = Field(default=0, ge=0, le=10)
 
 class BookCreate(BookBase):
     pass
@@ -17,3 +16,14 @@ class BookOut(BookBase):
 
     class Config:
         from_attributes = True
+
+class BookRatingCreate(BaseModel):
+    score: float = Field(..., ge=0.0, le=5.0)  
+
+class BookRatingResponse(BaseModel):
+    book_id: int
+    average_score: float
+    ratings_count: int
+
+    class Config:
+        orm_mode = True
