@@ -8,3 +8,4 @@ class Book(Base):
     title = Column(String, nullable=False)
     author = Column(String, nullable=False)
     description = Column(Text)
+    rating = Column(Integer, default=0)

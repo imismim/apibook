@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from ..models.book import Book
 
-def create_book(db: Session, title: str, author: str, description: str = None):
-    book = Book(title=title, author=author, description=description)
+def create_book(db: Session, title: str, author: str, description: str = None, rating: float = 0.0):
+    book = Book(title=title, author=author, description=description, rating=rating)
     db.add(book)
     db.commit()
     db.refresh(book)
@@ -11,12 +11,13 @@ def create_book(db: Session, title: str, author: str, description: str = None):
 def get_books(db: Session):
     return db.query(Book).all()
 
-def update_book(db: Session, book_id: int, title: str, author: str, description: str):
+def update_book(db: Session, book_id: int, title: str, author: str, description: str, rating: float):
     book = db.query(Book).filter(Book.id == book_id).first()
     if book:
         book.title = title
         book.author = author
         book.description = description
+        book.rating = rating
         db.commit()
         db.refresh(book)
     return book
